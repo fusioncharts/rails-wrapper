@@ -6,8 +6,8 @@ require 'fusioncharts/rails/version'
 Gem::Specification.new do |spec|
   spec.name          = "fusioncharts-rails"
   spec.version       = Fusioncharts::Rails::VERSION
-  spec.authors       = ["Swaroop SM"]
-  spec.email         = ["swaroop.striker@gmail.com"]
+  spec.authors       = ["FusionCharts"]
+  spec.email         = ["mail@labs.fusioncharts.com"]
   spec.description   = %q{Wrapper for fusioncharts}
   spec.summary       = %q{Wrapper for fusioncharts}
   spec.homepage      = ""

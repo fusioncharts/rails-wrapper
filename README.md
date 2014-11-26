@@ -16,7 +16,17 @@ Or install it yourself as:
 
     $ gem install fusioncharts-rails
 
-## Usage
+## Getting Started
+You will have to download the latest fusioncharts library at [http://www.fusioncharts.com/download/](http://www.fusioncharts.com/download/). Once you have downloaded and extracted, copy the `javascript` files into `vendor/assets/javascripts/fusioncharts/`.
+
+Require the following lines in the `app/assets/javascripts/application.js`
+~~~
+//= require fusioncharts/fusioncharts
+//= require fusioncharts/fusioncharts.charts
+//= require fusioncharts/themes/fusioncharts.theme.fint
+~~~
+
+## Usage Guide
 
 ### 1. Creating a chart:
 Create the FusionCharts object in the controller action like the following:

@@ -2,66 +2,62 @@ module Fusioncharts
 
     class Chart
 
-      include ActionView::Helpers::OutputSafetyHelper
+      include ::ActionView::Helpers::OutputSafetyHelper
 
-      attr_accessor :options, :jsonUrl, :xmlUrl
+      attr_accessor :options
+      attr_reader :width, :height, :type, :renderAt, :dataSource, :jsonUrl, :xmlUrl
 
       def initialize(options=nil)
-        self.options = options == nil ? {} : options
+        if options.nil?
+          @options = {}
+        else
+          @options = options
+          parse_options
+        end
       end
 
-      def setWidth(width)
-        self.setOption('width', width.to_s)
- 
-        return self       
+      def width=(width)
+        @width = width.to_s
+
+        setOption('width', @width)
       end
 
-      def setHeight(height)
-        self.setOption('height', height.to_s)
-        
-        return self
+      def height=(height)
+        @height = height.to_s
+
+        setOption('height', @height)
       end
 
-      def setChartType(type)
-        self.setOption('type', type)
+      def type=(type)
+        @type = type
 
-        return self
+        setOption('type', @type)
       end
 
-      def setDataFormat(format)
-        self.setOption('dataFormat', format)
+      def dataFormat(format)
+        @dataFormat = format
 
-        return self
+        setOption('dataFormat', @dataFormat)
       end
 
-      def renderAt(id)
-        self.setOption('renderAt',  id)
+      def renderAt=(id)
+        @renderAt = id
 
-        return self
+        setOption('renderAt',  @renderAt)
+      end
+      
+      def dataSource=(dataSource)
+        @dataSource = dataSource
+
+        setOption('dataSource', @dataSource)
       end
 
-      def setOption(key, value)
-        self.options[key] = value
-
-        return self
+      def jsonUrl=(url)
+        @jsonUrl = url
       end
 
-      def setDataSource(dataSource)
-        self.setOption('dataSource', dataSource)
-
-        return self
-      end
-
-      def setJSONUrl(url)
-        self.jsonUrl = url
-
-        return self
-      end
-
-      def setXMLUrl(url)
-        self.xmlUrl = url
-
-        return self
+      def xmlUrl=(url)
+        @xmlUrl = url
       end
 
       def xmlUrl?
@@ -78,6 +74,19 @@ module Fusioncharts
         template = File.read(File.expand_path("../../../templates/chart.erb", __FILE__))
         renderer = ERB.new(template)
         raw renderer.result(binding)
+      end
+
+      private
+      def setOption(key, value)
+        self.options[key] = value
+
+        return self
+      end
+
+      def parse_options
+        keys = @options.keys
+
+        keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] }
       end
 
     end

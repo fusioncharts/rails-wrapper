@@ -5,7 +5,7 @@ module Fusioncharts
       include ::ActionView::Helpers::OutputSafetyHelper
 
       attr_accessor :options
-      attr_reader :width, :height, :type, :renderAt, :dataSource, :jsonUrl, :xmlUrl
+      attr_reader :width, :height, :type, :renderAt, :dataSource, :dataFormat, :jsonUrl, :xmlUrl
 
       def initialize(options=nil)
         if options.nil?
@@ -34,7 +34,7 @@ module Fusioncharts
         setOption('type', @type)
       end
 
-      def dataFormat(format)
+      def dataFormat=(format)
         @dataFormat = format
 
         setOption('dataFormat', @dataFormat)
@@ -86,7 +86,7 @@ module Fusioncharts
       def parse_options
         keys = @options.keys
 
-        keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] }
+        keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] if self.respond_to? k }
       end
 
     end

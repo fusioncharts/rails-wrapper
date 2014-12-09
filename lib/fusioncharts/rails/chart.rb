@@ -48,8 +48,11 @@ module Fusioncharts
       
       def dataSource=(dataSource)
         @dataSource = dataSource
+        parse_datasource_json
+      end
 
-        setOption('dataSource', @dataSource)
+      def jsonString?
+
       end
 
       def jsonUrl=(url)
@@ -83,10 +86,21 @@ module Fusioncharts
         return self
       end
 
+      def parse_datasource_json
+        @dataFormat = "json" unless defined? @dataFormat
+
+        if !xmlUrl? or !jsonUrl?
+          @dataSource = JSON.parse(@dataSource) if @dataSource.is_a? String and @dataFormat == "json"
+        end
+
+        setOption('dataSource', @dataSource)
+      end
+
       def parse_options
         keys = @options.keys
 
         keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] if self.respond_to? k }
+        parse_datasource_json
       end
 
     end

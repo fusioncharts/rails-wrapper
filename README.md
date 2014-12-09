@@ -103,43 +103,39 @@ In order to render the chart, you can use the `render` method in the specific vi
 
 ~~~
 
+### 3. Note
+- The `dataSource` method can take accept data which is one of the following formats:
+  - Valid Ruby Hash
+  - JSON String
+  - XML String
+- Also look at [FusionCharts Export Handler]()[TODO] to understand how to import a chart to different image formats and to PDF.
+
 ## API Methods
 
-### setWidth(width)
-Set the `width` of the chart.
+### Set width of the chart.
 ~~~
-@chart.setWidth("600")
-~~~
-
-### setHeight(height)
-Set the `height` of the chart.
-~~~
-@chart.setWidth("400")
+@chart.width = 600
 ~~~
 
-### setChartType(chartType)
-Set the `chart type`. 
+### Set height of the chart.
 ~~~
-@chart.setChartType("column2d")
-~~~
-
-### setDataFormat(format)
-Set the datasource format of the chart.
-~~~
-@chart.setDataFormat("json")
+@chart.height = 400
 ~~~
 
-### renderAt(domid)
-Set the DOM id where the chart should be rendered.
+### Set the chart type. 
 ~~~
-@chart.renderAt("chartContainer")
+@chart.type = "column2d"
 ~~~
 
-### setDataSource(datsource)
-Set the `datasource` for the chart.
+### Set the datasource format of the chart.
 ~~~
-@chart.setDataSource({
-  chart: {
+@chart.dataFormat = "json"
+~~~
+
+### Set the datasource format of the chart.
+~~~
+@chart.dataSource = {
+    chart: {
             caption: "Comparison of Quarterly Revenue",
             subCaption: "Harry's SuperMart",
             xAxisname: "Quarter",
@@ -176,17 +172,25 @@ Set the `datasource` for the chart.
                     ]
                 }
           ]
-})
+}
 ~~~
 
-### setJSONUrl(url)
-Set the url from where the datasource should be fetched. This must be in `json` format.
+### Set the url from where the datasource should be fetched. This must be a valid `json` data.
 ~~~
-@chart.setJSONUrl("/data/chart.json")
+@chart.jsonUrl = "/data/chart.json"
 ~~~
 
-### setXMLUrl(url)
-Set the url from where the datasource should be fetched. This must be in `xml` format.
+### Set the url from where the datasource should be fetched. This must be a valid `xml` data.
 ~~~
-@chart.setXMLUrl("/data/chart.xml")
+@chart.xmlUrl = "/data/chart.xml"
+~~~
+
+### Set the DOM id where the chart should be rendered.
+~~~
+@chart.renderAt = "chartContainer"
+~~~
+
+### Render the chart.
+~~~
+@chart.render()
 ~~~

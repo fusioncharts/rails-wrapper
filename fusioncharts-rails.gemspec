@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Fusioncharts::Rails::VERSION
   spec.authors       = ["FusionCharts"]
   spec.email         = ["mail@labs.fusioncharts.com"]
-  spec.description   = %q{Wrapper for fusioncharts}
+  spec.description   = %q{Server Wrapper for rendering FusionCharts on Rails}
   spec.summary       = %q{Wrapper for fusioncharts}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/fusioncharts/rails-wrapper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

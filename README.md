@@ -108,7 +108,7 @@ In order to render the chart, you can use the `render` method in the specific vi
   - Valid Ruby Hash
   - JSON String
   - XML String
-- Also look at [FusionCharts Export Handler]()[TODO] to understand how to import a chart to different image formats and to PDF.
+- Also look at [FusionCharts Export Handler](https://github.com/fusioncharts/rails-exporter) to understand how to import a chart to different image formats and to PDF.
 
 ## API Methods
 

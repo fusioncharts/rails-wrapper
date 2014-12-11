@@ -1,6 +1,8 @@
 # Fusioncharts Rails
 
-Rails plugin to build charts using FusionCharts. [http://www.fusioncharts.com](http://www.fusioncharts.com)
+[![Gem Version](https://badge.fury.io/rb/fusioncharts-rails.svg)](http://badge.fury.io/rb/fusioncharts-rails)
+
+Rails wrapper to build charts using FusionCharts. [http://www.fusioncharts.com](http://www.fusioncharts.com)
 
 ## Installation
 

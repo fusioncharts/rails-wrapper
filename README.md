@@ -1,6 +1,8 @@
 # Fusioncharts Rails
 
 [![Gem Version](https://badge.fury.io/rb/fusioncharts-rails.svg)](http://badge.fury.io/rb/fusioncharts-rails)
+[![Code Climate](https://codeclimate.com/github/fusioncharts/rails-wrapper/badges/gpa.svg)](https://codeclimate.com/github/fusioncharts/rails-wrapper)
+[![Build Status](https://travis-ci.org/fusioncharts/rails-wrapper.svg)](https://travis-ci.org/fusioncharts/rails-wrapper)
 
 Rails wrapper to build charts using FusionCharts. [http://www.fusioncharts.com](http://www.fusioncharts.com)
 
@@ -110,7 +112,7 @@ In order to render the chart, you can use the `render` method in the specific vi
   - Valid Ruby Hash
   - JSON String
   - XML String
-- Also look at [FusionCharts Export Handler](https://github.com/fusioncharts/rails-exporter) to understand how to import a chart to different image formats and to PDF.
+- Also look at [FusionCharts Export Handler](https://github.com/fusioncharts/rails-exporter) to understand how to export a chart to different image formats and PDF.
 
 ## API Methods
 

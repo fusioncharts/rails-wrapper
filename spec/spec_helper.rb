@@ -15,6 +15,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require "active_support"
 require "active_support/core_ext"
 require "action_view"
 require "fusioncharts/rails/chart"

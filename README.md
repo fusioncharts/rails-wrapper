@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/fusioncharts-rails.svg)](http://badge.fury.io/rb/fusioncharts-rails)
 [![Code Climate](https://codeclimate.com/github/fusioncharts/rails-wrapper/badges/gpa.svg)](https://codeclimate.com/github/fusioncharts/rails-wrapper)
-[![Build Status](https://travis-ci.org/fusioncharts/rails-wrapper.svg)](https://travis-ci.org/fusioncharts/rails-wrapper)
 
 Rails wrapper to build charts using FusionCharts. [http://www.fusioncharts.com](http://www.fusioncharts.com)
 

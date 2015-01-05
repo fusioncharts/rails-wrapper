@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+    <head>
+        <title>FusionCharts Ruby on Rails Wrapper</title>
+        <style type="text/css">
+            pre {
+                max-height: 400px;
+            }
+
+            /* From the passportjs.org website */
+            .masthead {
+              margin-bottom: 20px;
+              padding-bottom: 5px;
+              border-bottom: 1px solid #eeeeee;
+            }
+
+            .masthead .logo {
+              height: 38px;
+              width: 210px;
+            }
+
+            .masthead h3 a {
+              color: #333333;;
+              text-decoration: none;
+            }
+
+            .masthead h3 a:hover {
+              color: #333333;
+              text-decoration: none;
+            }
+
+           
+        </style>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="masthead">
+                    <ul class="nav nav-pills pull-right">
+                        <li><a href="http://fusioncharts.com/">FusionCharts Home</a></li>
+                    </ul>
+                    <h3>
+                        <a href="http://fusioncharts.github.io/angular-fusioncharts/"><img src="http://www.fusioncharts.com/theme/210x38xlogo.png.pagespeed.ic.KZD9tJ7qIK.png" class="logo"></a>
+                    </h3>
+                </div>
+                <div class="jumbotron">
+                    <h1>FusionCharts Ruby on Rails Wrapper</h1>
+                    <p>Rails wrapper to build charts using FusionCharts.</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button"><i class="glyphicon glyphicon-download"></i> Download (1.0)</a></p>
+                </div>
+                <div class="readme">
+                    <h1 id="fusioncharts-rails">Fusioncharts Rails</h1>
+<p><a href="http://badge.fury.io/rb/fusioncharts-rails"><img src="https://badge.fury.io/rb/fusioncharts-rails.svg" alt="Gem Version"></a>
+<a href="https://codeclimate.com/github/fusioncharts/rails-wrapper"><img src="https://codeclimate.com/github/fusioncharts/rails-wrapper/badges/gpa.svg" alt="Code Climate"></a></p>
+<p>Rails wrapper to build charts using FusionCharts. <a href="http://www.fusioncharts.com">http://www.fusioncharts.com</a></p>
+<h2 id="installation">Installation</h2>
+<p>Add this line to your application&#39;s Gemfile:</p>
+<pre><code>gem &#39;fusioncharts-rails&#39;
+</code></pre><p>And then execute:</p>
+<pre><code>$ bundle
+</code></pre><p>Or install it yourself as:</p>
+<pre><code>$ gem install fusioncharts-rails
+</code></pre><h2 id="getting-started">Getting Started</h2>
+<p>You will have to download the latest fusioncharts library at <a href="http://www.fusioncharts.com/download/">http://www.fusioncharts.com/download/</a>. Once you have downloaded and extracted, copy the <code>javascript</code> files into <code>vendor/assets/javascripts/fusioncharts/</code>.</p>
+<p>Require the following lines in the <code>app/assets/javascripts/application.js</code></p>
+<pre><code>//= require fusioncharts/fusioncharts
+//= require fusioncharts/fusioncharts.charts
+//= require fusioncharts/themes/fusioncharts.theme.fint
+</code></pre><h2 id="usage-guide">Usage Guide</h2>
+<h3 id="1-creating-a-chart-">1. Creating a chart:</h3>
+<p>Create the FusionCharts object in the controller action like the following:</p>
+<pre><code>
+#Filename: app/controllers/dashboard_controller.rb
+
+class DashboardController &lt; ApplicationController
+
+  def index
+
+    @chart = Fusioncharts::Chart.new({
+        width: &quot;600&quot;,
+        height: &quot;400&quot;,
+        type: &quot;mscolumn2d&quot;,
+        renderAt: &quot;chartContainer&quot;,
+        dataSource: {
+            chart: {
+            caption: &quot;Comparison of Quarterly Revenue&quot;,
+            subCaption: &quot;Harry&#39;s SuperMart&quot;,
+            xAxisname: &quot;Quarter&quot;,
+            yAxisName: &quot;Amount ($)&quot;,
+            numberPrefix: &quot;$&quot;,
+            theme: &quot;fint&quot;,
+            exportEnabled: &quot;1&quot;,
+            },
+            categories: [{
+                    category: [
+                        { label: &quot;Q1&quot; },
+                        { label: &quot;Q2&quot; },
+                        { label: &quot;Q3&quot; },
+                        { label: &quot;Q4&quot; }
+                    ]
+                }],
+                dataset: [
+                    {
+                        seriesname: &quot;Previous Year&quot;,
+                        data: [
+                            { value: &quot;10000&quot; },
+                            { value: &quot;11500&quot; },
+                            { value: &quot;12500&quot; },
+                            { value: &quot;15000&quot; }
+                        ]
+                    },
+                    {
+                        seriesname: &quot;Current Year&quot;,
+                        data: [
+                            { value: &quot;25400&quot; },
+                            { value: &quot;29800&quot; },
+                            { value: &quot;21800&quot; },
+                            { value: &quot;26800&quot; }
+                        ]
+                    }
+              ]
+        }
+    })
+
+  end
+
+end
+</code></pre><h3 id="2-render-the-chart">2. Render the chart</h3>
+<p>In order to render the chart, you can use the <code>render</code> method in the specific view</p>
+<pre><code>
+&lt;!-- Filename: app/views/dashboard/index.html.erb --&gt;
+
+&lt;h3&gt;My Chart&lt;/h3&gt;
+&lt;div id=&quot;chartContainer&quot;&gt;&lt;%= @chart.render() %&gt;&lt;/div&gt;
+</code></pre><h3 id="3-note">3. Note</h3>
+<ul>
+<li>The <code>dataSource</code> method can take accept data which is one of the following formats:<ul>
+<li>Valid Ruby Hash</li>
+<li>JSON String</li>
+<li>XML String</li>
+</ul>
+</li>
+<li>Also look at <a href="https://github.com/fusioncharts/rails-exporter">FusionCharts Export Handler</a> to understand how to export a chart to different image formats and PDF.</li>
+</ul>
+<h2 id="api-methods">API Methods</h2>
+<h3 id="set-width-of-the-chart-">Set width of the chart.</h3>
+<pre><code>@chart.width = 600
+</code></pre><h3 id="set-height-of-the-chart-">Set height of the chart.</h3>
+<pre><code>@chart.height = 400
+</code></pre><h3 id="set-the-chart-type-">Set the chart type.</h3>
+<pre><code>@chart.type = &quot;column2d&quot;
+</code></pre><h3 id="set-the-datasource-format-of-the-chart-">Set the datasource format of the chart.</h3>
+<pre><code>@chart.dataFormat = &quot;json&quot;
+</code></pre><h3 id="set-the-datasource-format-of-the-chart-">Set the datasource format of the chart.</h3>
+<pre><code>@chart.dataSource = {
+    chart: {
+            caption: &quot;Comparison of Quarterly Revenue&quot;,
+            subCaption: &quot;Harry&#39;s SuperMart&quot;,
+            xAxisname: &quot;Quarter&quot;,
+            yAxisName: &quot;Amount ($)&quot;,
+            numberPrefix: &quot;$&quot;,
+            theme: &quot;fint&quot;,
+            exportEnabled: &quot;1&quot;,
+            },
+            categories: [{
+                  category: [
+                      { label: &quot;Q1&quot; },
+                      { label: &quot;Q2&quot; },
+                      { label: &quot;Q3&quot; },
+                      { label: &quot;Q4&quot; }
+                  ]
+                }],
+            dataset: [
+                {
+                    seriesname: &quot;Previous Year&quot;,
+                    data: [
+                        { value: &quot;10000&quot; },
+                        { value: &quot;11500&quot; },
+                        { value: &quot;12500&quot; },
+                        { value: &quot;15000&quot; }
+                    ]
+                },
+                {
+                    seriesname: &quot;Current Year&quot;,
+                    data: [
+                        { value: &quot;25400&quot; },
+                        { value: &quot;29800&quot; },
+                        { value: &quot;21800&quot; },
+                        { value: &quot;26800&quot; }
+                    ]
+                }
+          ]
+}
+</code></pre><h3 id="set-the-url-from-where-the-datasource-should-be-fetched-this-must-be-a-valid-json-data-">Set the url from where the datasource should be fetched. This must be a valid <code>json</code> data.</h3>
+<pre><code>@chart.jsonUrl = &quot;/data/chart.json&quot;
+</code></pre><h3 id="set-the-url-from-where-the-datasource-should-be-fetched-this-must-be-a-valid-xml-data-">Set the url from where the datasource should be fetched. This must be a valid <code>xml</code> data.</h3>
+<pre><code>@chart.xmlUrl = &quot;/data/chart.xml&quot;
+</code></pre><h3 id="set-the-dom-id-where-the-chart-should-be-rendered-">Set the DOM id where the chart should be rendered.</h3>
+<pre><code>@chart.renderAt = &quot;chartContainer&quot;
+</code></pre><h3 id="render-the-chart-">Render the chart.</h3>
+<pre><code>@chart.render()
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

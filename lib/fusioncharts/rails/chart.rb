@@ -84,7 +84,7 @@ module Fusioncharts
 
       # Render the chart
       def render
-        config = self.options.to_json
+        config = json_escape JSON.generate(self.options)
         dataUrlFormat = self.jsonUrl? ? "json" : ( self.xmlUrl ? "xml" : nil )
         template = File.read(File.expand_path("../../../templates/chart.erb", __FILE__))
         renderer = ERB.new(template)
@@ -116,6 +116,11 @@ module Fusioncharts
 
         keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] if self.respond_to? k }
         parse_datasource_json
+      end
+
+      # Escape tags in json, if avoided might be vulnerable to XSS
+      def json_escape(str)
+        str.to_s.gsub('/', '\/')
       end
 
     end

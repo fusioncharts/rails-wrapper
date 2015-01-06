@@ -107,7 +107,7 @@ In order to render the chart, you can use the `render` method in the specific vi
 ~~~
 
 ### 3. Note
-- The `dataSource` method can take accept data which is one of the following formats:
+- The `dataSource` key (which can be set using the `dataSource` method or passed in as a hash in the chart constructor) can accept data which is in one of the following formats:
   - Valid Ruby Hash
   - JSON String
   - XML String

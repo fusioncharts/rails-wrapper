@@ -22,6 +22,7 @@ Or install it yourself as:
 ## Installation (Manual)
 
 Step 1: Copy all files from `fusioncharts-suite-xt > integrations > rubyonrails > fusioncharts-wrapper` folder.
+
 Step 2: Paste the copied files to the `/lib` folder of your application.
 
 

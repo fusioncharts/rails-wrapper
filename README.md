@@ -5,7 +5,7 @@
 
 Rails wrapper to build charts using FusionCharts. [http://www.fusioncharts.com](http://www.fusioncharts.com)
 
-## Installation
+## Installation (RubyGems)
 
 Add this line to your application's Gemfile:
 
@@ -18,6 +18,12 @@ And then execute:
 Or install it yourself as:
 
     $ gem install fusioncharts-rails
+
+## Installation (Manual)
+
+Step 1: Copy all files from `fusioncharts-suite-xt > integrations > rubyonrails > fusioncharts-wrapper` folder.
+Step 2: Paste the copied files to the `/lib` folder of your application.
+
 
 ## Getting Started
 You will have to download the latest fusioncharts library at [http://www.fusioncharts.com/download/](http://www.fusioncharts.com/download/). Once you have downloaded and extracted, copy the `javascript` files into `vendor/assets/javascripts/fusioncharts/`.

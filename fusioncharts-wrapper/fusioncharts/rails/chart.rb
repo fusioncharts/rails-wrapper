@@ -4,11 +4,12 @@ module Fusioncharts
 
       include ::ActionView::Helpers::OutputSafetyHelper
 
-      attr_accessor :options
+      attr_accessor :options, :fusionchartsEvent
       attr_reader :width, :height, :type, :renderAt, :dataSource, :dataFormat, :jsonUrl, :xmlUrl
 
       # Constructor
       def initialize(options=nil)
+        @fusionchartsEvent = ""
         if options.nil?
           @options = {}
         else
@@ -53,7 +54,7 @@ module Fusioncharts
         setOption('renderAt',  @renderAt)
       end
       
-      # Set the datasource for the chart. It can take the followinf formats
+      # Set the datasource for the chart. It can take the following formats
       # 1. Ruby Hash
       # 2. XML string
       # 3. JSON string
@@ -81,6 +82,10 @@ module Fusioncharts
       def jsonUrl?
         self.jsonUrl ? true : false
       end
+      
+      def addEvent(eventName, eventHandler)
+        @fusionchartsEvent << "\n_fc_chart.addEventListener(\"" << eventName << "\"," << eventHandler << ")\n";
+      end
 
       # Render the chart
       def render
@@ -88,7 +93,7 @@ module Fusioncharts
         dataUrlFormat = self.jsonUrl? ? "json" : ( self.xmlUrl ? "xml" : nil )
         template = File.read(File.expand_path("../../../templates/chart.erb", __FILE__))
         renderer = ERB.new(template)
-        raw renderer.result(binding)
+        return raw renderer.result(binding)
       end
 
       private
@@ -113,9 +118,8 @@ module Fusioncharts
       # Helper method that converts the constructor params into instance variables
       def parse_options
         keys = @options.keys
-
         keys.each{ |k| instance_variable_set "@#{k}".to_sym, @options[k] if self.respond_to? k }
-        parse_datasource_json
+        #parse_datasource_json
       end
 
       # Escape tags in json, if avoided might be vulnerable to XSS

@@ -6,6 +6,9 @@
     <% elsif(dataUrlFormat == 'xml') %>
     _fc_chart.setXMLUrl("<%= @xmlUrl %>")
     <% end %>
+    
+    <%= @fusionchartsEvent %>
+
     _fc_chart.render();
   });
 </script>

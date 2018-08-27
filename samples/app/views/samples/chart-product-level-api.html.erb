@@ -1,0 +1,92 @@
+<%
+    def getChart
+        chartData = {
+                    "chart": {
+                        "caption": "Countries With Most Oil Reserves [2017-18]",
+                        "subCaption": "In MMbbl = One Million barrels",
+                        "xAxisName": "Country",
+                        "yAxisName": "Reserves (MMbbl)",
+                        "numberSuffix": "K",
+                        "theme": "fusion",
+                    },
+                    "data": [{
+                        "label": "Venezuela",
+                        "value": "290"
+                    }, {
+                        "label": "Saudi",
+                        "value": "260"
+                    }, {
+                        "label": "Canada",
+                        "value": "180"
+                    }, {
+                        "label": "Iran",
+                        "value": "140"
+                    }, {
+                        "label": "Russia",
+                        "value": "115"
+                    }, {
+                        "label": "UAE",
+                        "value": "100"
+                    }, {
+                        "label": "US",
+                        "value": "30"
+                    }, {
+                        "label": "China",
+                        "value": "30"
+                    }]
+                }
+
+        # Chart rendering 
+        chart = Fusioncharts::Chart.new({
+                id: "mychart",
+                width: "700",
+                height: "400",
+                type: "column2d",
+                renderAt: "chartContainer",
+                dataSource: chartData
+            })
+
+    end
+%>
+
+<script>
+    changeCaption = function () {
+        debugger;
+        FusionCharts("mychart").setChartAttribute('caption', 'Test Caption');
+    }
+    changeXAxisName = function(){
+        FusionCharts("mychart").setChartAttribute('xAxisName', 'Test X-Axis');
+    }
+    changeYAxisName = function(){
+        FusionCharts("mychart").setChartAttribute('yAxisName', 'Test Y-Axis');
+    }
+    reset = function () {
+        
+        FusionCharts("mychart").setChartAttribute('caption', 'Countries With Most Oil Reserves [2017-18]');
+        FusionCharts("mychart").setChartAttribute('xAxisName', 'Country');
+        FusionCharts("mychart").setChartAttribute('yAxisName', 'Reserves (MMbbl)');
+    }
+</script>
+
+<h3>Change chart properties dynamically</h3>
+<div id="chartContainer"></div>
+<%= getChart.render() %>
+<br/>
+        <div>
+            <p align="center" id ="message"></p>
+        </div>
+
+        <div id="controllers" align="center" style="font-family:'Helvetica Neue', Arial; font-size: 14px;">
+            <input type="radio" id="radio1" name="radios" onclick="changeCaption()" />
+            <label for="radio1">Change Caption: Test Caption</label>
+            <input type="radio" id="radio2" name="radios"value="false" onclick="changeXAxisName()" />
+            <label for="radio2">Change X-Axis Name: Test X-Axis</label>
+            <input type="radio" id="radio3" name="radios"value="false" onclick="changeYAxisName()" />
+            <label for="radio3">Change Y-Axis Name: Test Y-Axis</label>
+            <input type="radio" id="radio4" name="radios" value="false" onclick="reset()" />
+            <label for="radio4">Reset</label>
+        </div> 
+<br/>
+<br/>
+
+<a href="index">Go Back</a>

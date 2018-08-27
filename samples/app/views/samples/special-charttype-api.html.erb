@@ -1,0 +1,101 @@
+<%
+    def getChart
+        chartData = {
+            'chart': {
+                'caption': 'Market Share of Web Servers',
+                'plottooltext': '<b>$percentValue</b> of web servers run on $label servers',
+                'showLegend': '0',
+                'enableMultiSlicing': '0',
+                'showPercentValues': '1',
+                'legendPosition': 'bottom',
+                'useDataPlotColorForLabels': '1',
+                'theme': 'fusion',
+            },
+            'data': [{
+                'label': 'Apache',
+                'value': '32647479'
+            }, {
+                'label': 'Microsoft',
+                'value': '22100932'
+            }, {
+                'label': 'Zeus',
+                'value': '14376'
+            }, {
+                'label': 'Other',
+                'value': '18674221'
+            }]
+        }
+
+        # Chart rendering 
+        chart = Fusioncharts::Chart.new({
+                id: "first_chart",
+                width: "700",
+                height: "400",
+                type: "pie2d",
+                renderAt: "chartContainer",
+                dataSource: chartData
+            })
+
+        chart.addEvent("dataplotClick", "plotClickHandler");
+        return chart
+    end
+%>
+
+    <script>
+        selectedItem = "none";
+         plotClickHandler = function(event){
+            clickedPlot = (event.data.categoryLabel).toLowerCase();
+              if (selectedItem !== clickedPlot) {
+                    selectedItem = clickedPlot;
+              } else{
+                    selectedItem = 'none';
+              }
+        };
+        noneChecked = function(){
+            FusionCharts("first_chart").slicePlotItem(0,false);
+            FusionCharts("first_chart").slicePlotItem(1,false);
+            FusionCharts("first_chart").slicePlotItem(2,false);
+            FusionCharts("first_chart").slicePlotItem(3,false);
+        }
+        apacheChecked = function(){
+            FusionCharts("first_chart").slicePlotItem(0,true);
+        }
+        microsoftChecked = function(){
+            FusionCharts("first_chart").slicePlotItem(1,true);
+        }
+        zeusChecked = function(){
+            FusionCharts("first_chart").slicePlotItem(2,true);
+        }
+        otherChecked = function(){
+            FusionCharts("first_chart").slicePlotItem(3,true);
+        }
+    </script>
+
+<h3>Use special chart type API</h3>
+<div id="controllers" align="center" style="font-family:'Helvetica Neue', Arial; font-size: 14px;">
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="rdGrp-options" checked="checked" onclick="noneChecked()"/> None
+    </label>
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="rdGrp-options" onclick="apacheChecked()"/> Apache
+    </label>
+    <label style="padding: 0px 5px !important;">
+            <input type="radio" name="rdGrp-options" onclick="microsoftChecked()"/> Microsoft
+    </label>
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="rdGrp-options" onclick="zeusChecked()"/> Zeus
+    </label>
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="rdGrp-options" onclick="otherChecked()"/> Other
+    </label>        
+</div>
+
+<div id="chartContainer"></div>
+<%= getChart.render() %>
+<br/>
+   <div>
+        <p id ="dataLoaded">Click on data plot above</p>
+    </div>
+<br/>
+<br/>
+<a href="index">Go Back</a>

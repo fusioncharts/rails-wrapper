@@ -1,0 +1,87 @@
+<%
+    def getChart
+        chartData =  {
+                    "chart": {
+                        "caption": "Countries With Most Oil Reserves [2017-18]",
+                        "subCaption": "In MMbbl = One Million barrels",
+                        "xAxisName": "Country",
+                        "yAxisName": "Reserves (MMbbl)",
+                        "numberSuffix": "K",
+                        "theme": "fusion",
+                    },
+                    "data": [{
+                        "label": "Venezuela",
+                        "value": "290"
+                    }, {
+                        "label": "Saudi",
+                        "value": "260"
+                    }, {
+                        "label": "Canada",
+                        "value": "180"
+                    }, {
+                        "label": "Iran",
+                        "value": "140"
+                    }, {
+                        "label": "Russia",
+                        "value": "115"
+                    }, {
+                        "label": "UAE",
+                        "value": "100"
+                    }, {
+                        "label": "US",
+                        "value": "30"
+                    }, {
+                        "label": "China",
+                        "value": "30"
+                    }]
+                }
+
+        # Chart rendering 
+        chart = Fusioncharts::Chart.new({
+                id: "myChart",
+                width: "700",
+                height: "400",
+                type: "column2d",
+                renderAt: "chartContainer",
+                dataSource: chartData,
+            })
+
+    end
+%>
+
+<script>
+        track = function(){
+            FusionCharts.items["myChart"].addEventListener("dataplotclick", clickHandler);
+            document.getElementById("message").innerHTML = "Click on the plot to see the value along with the label";
+        };
+        clickHandler = function(e){
+            document.getElementById("message").innerHTML = "You have clicked on plot <b>"+  e.data.categoryLabel + "</b> whose value is <b>" + e.data.displayValue + "</b>";
+        };
+        reset = function(){
+            FusionCharts.items["myChart"].removeEventListener("dataplotclick", clickHandler);
+            document.getElementById("message").innerHTML = "Click the below buttons to add an event dynamically to the chart";
+        }
+</script>
+
+        <h3>Add event to a chart dyamically</h3>
+        <div>
+            <div id="chartContainer"></div>
+            <%= getChart.render() %>
+        </div>
+       <div>
+            <p align="center" id ="message"></p>
+        </div>
+
+        <div id="controllers" align="center" style="font-family:'Helvetica Neue', Arial; font-size: 14px;">
+            <input type="radio" id="radio1" name="radios" onclick="track()" />
+            <label for="radio1">LISTEN TO DATAPLOTCLICK EVENT</label>
+            <input type="radio" id="radio2" name="radios"value="false" onclick="reset()" />
+            <label for="radio2">REMOVE DATAPLOTCLICK EVENT</label>
+        </div> 
+
+<div>
+    <p id ="message"></p>
+</div>
+<br/>
+<br/>
+<a href="index">Go Back</a>

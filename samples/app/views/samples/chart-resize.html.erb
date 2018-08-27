@@ -1,0 +1,98 @@
+<%
+    require 'fusioncharts-rails'
+
+    def getChart
+        chartData = {
+            "chart": {
+                "caption": "Countries With Most Oil Reserves [2017-18]",
+                "subcaption": "In MMbbl = One Million barrels",
+                "xaxisname": "Country",
+                "yaxisname": "Reserves (MMbbl)",
+                "numbersuffix": "K",
+                "theme": "fusion"
+            },
+            "data": [{
+                "label": "Venezuela",
+                "value": "290"
+            }, {
+                "label": "Saudi",
+                "value": "260"
+            }, {
+                "label": "Canada",
+                "value": "180"
+            }, {
+                "label": "Iran",
+                "value": "140"
+            }, {
+                "label": "Russia",
+                "value": "115"
+            }, {
+                "label": "UAE",
+                "value": "100"
+            }, {
+                "label": "US",
+                "value": "30"
+            }, {
+                "label": "China",
+                "value": "30"
+            }]
+        }
+        
+        # Chart rendering 
+        chart = Fusioncharts::Chart.new({
+                width: "100%",
+                height: "100%",
+                type: "column2d",
+                renderAt: "chartContainer",
+                dataSource: chartData
+            })
+    end
+%>
+
+<h3>Chart Auto-Resise Sample</h3>
+
+<script type="text/javascript">
+            FusionCharts && FusionCharts.ready(function () {
+            var trans = document.getElementById("controllers").getElementsByTagName("input");
+            for (var i=0, len=trans.length; i<len; i++) {                
+                if (trans[i].type == "radio"){
+                    trans[i].onchange = function() {
+                        changeSize(this.value);
+                    };
+                }
+            }
+        });
+        
+
+        function changeSize(size) {
+            document.getElementById('chartContainer').style.width =  size.split('x')[0] + 'px';
+            document.getElementById('chartContainer').style.height = size.split('x')[1] + 'px';
+        };
+</script>
+
+
+
+<div align="center">
+    <label style="padding: 0px 5px !important;">Select Chart Container Size (in pixels)</label>
+</div>
+<br/>
+<div id="controllers" align="center" style="font-family:'Helvetica Neue', Arial; font-size: 14px;">
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="div-size" checked value="400x300"/>400x300 
+    </label>
+    <label style="padding: 0px 5px !important;">
+        <input type="radio" name="div-size" value="600x500"/>600x500
+    </label>
+    <label style="padding: 0px 5px !important;">
+            <input type="radio" name="div-size" value="800x600"/>800x600
+    </label>
+</div>
+<br/>
+<br/>
+<br/>
+<div style="width: 100%; display: block;" align="center">
+        <div id="chartContainer" style="border-style: solid;border-color:#5a5a5a;width: 400px; height: 300px;"><%= getChart.render() %></div>
+</div>
+<br/>
+<br/>
+<a href="index">Go Back</a>

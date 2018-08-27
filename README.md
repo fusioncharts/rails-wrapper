@@ -204,3 +204,16 @@ In order to render the chart, you can use the `render` method in the specific vi
 ~~~
 @chart.render()
 ~~~
+
+## Adding Event(s)
+This is a public method used to generate the html code to add an event to a chart. This function assumes that you've already included the FusionCharts JavaScript class in your page. The following parameters have to be passed in order to attach event function.
+
+~~~
+@chart.addEvent("dataLoaded", "onDataLoaded");
+~~~
+
+| Parameter | Type | Description |
+|:-------|:----------:| :------|
+| eventName | `String` | Which event you want to bind. e.g. `dataLoaded`.|
+|funcName | `String` | Javascript function, which is written in your client side code|
+
